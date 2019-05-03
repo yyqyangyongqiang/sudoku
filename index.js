@@ -1,3 +1,5 @@
+// '添加随机生成数字，随机产生一个下标，根据传过来的下标确定所属的单元格，'
+
 // 数独游戏
 var Sudoku = {
     'one': ['','','','','','','','',''],
@@ -46,12 +48,14 @@ var num,temporary,sub;
 // [7,8] 表示第七行 第八列
 var subscript = [];  
 var oneNum = '';
+// 储存当前下标 所对应的单元格和数组下标
+var grid = [];
 
 // 定义随机生成的数字的数组
 var arr = [1,2,3,4,5,6,7,8,9];
 
 // 随机插入数字的总个数
-var total = 10;
+var total = 16;
 
 // 第一步 随机取出一个下标  TakeSubscript
 function TakeSubscript(){
@@ -110,36 +114,315 @@ function palaceIsExist(arr,item){
 // 根据传过来的参数 判断属于第几个单元格
 function Transformation(item) {
     if(item[0]<4 && item[1]<4){
-        return 'one';
-        console.log('第一个单元格');
+        grid.push('one');
+        item = item.join();
+        switch(item){
+            case '1,1':
+                grid.push('0');
+                break;
+            case '1,2':
+                grid.push('1');
+                break;
+            case '1,3':
+                grid.push('2');
+                break;
+            case '2,1':
+                grid.push('3');
+                break;
+            case '2,2':
+                grid.push('4');
+                break;
+            case '2,3':
+                grid.push('5');
+                break;
+            case '3,1':
+                grid.push('6');
+                break;
+            case '3,2':
+                grid.push('7');
+                break;
+            case '3,3':
+                grid.push('8');
+                break;
+        }
+        // console.log('第一个单元格');
     }else if(item[0]> 3 && item[0]< 7 && item[1]< 4){
-        return 'four';
-        console.log('第四个单元格');
+        grid.push('four');
+        item = item.join();
+
+        switch(item){
+            case '4,1':
+                grid.push('0');
+                break;
+            case '4,2':
+                grid.push('1');
+                break;
+            case '4,3':
+                grid.push('2');
+                break;
+            case '5,1':
+                grid.push('3');
+                break;
+            case '5,2':
+                grid.push('4');
+                break;
+            case '5,3':
+                grid.push('5');
+                break;
+            case '6,1':
+                grid.push('6');
+                break;
+            case '6,2':
+                grid.push('7');
+                break;
+            case '6,3':
+                grid.push('8');
+                break;
+        }
+        // console.log('第四个单元格');
     }else if(item[0]> 6  && item[1]< 4 ){
-        return 'seven';
-        console.log('第七个单元格');
+        grid.push('seven');
+        item = item.join();
+
+        switch(item){
+            case '7,1':
+                grid.push('0');
+                break;
+            case '7,2':
+                grid.push('1');
+                break;
+            case '7,3':
+                grid.push('2');
+                break;
+            case '8,1':
+                grid.push('3');
+                break;
+            case '8,2':
+                grid.push('4');
+                break;
+            case '8,3':
+                grid.push('5');
+                break;
+            case '9,1':
+                grid.push('6');
+                break;
+            case '9,2':
+                grid.push('7');
+                break;
+            case '9,3':
+                grid.push('8');
+                break;
+        }
+        // console.log('第七个单元格');
     }else if(item[0]< 4 && item[1]> 3 && item[1]< 7){
-        return 'two';
-        console.log('第二个单元格');
+        grid.push('two');
+        item = item.join();
+
+        switch(item){
+            case '2,4':
+                grid.push('0');
+                break;
+            case '2,5':
+                grid.push('1');
+                break;
+            case '2,6':
+                grid.push('2');
+                break;
+            case '3,4':
+                grid.push('3');
+                break;
+            case '3,5':
+                grid.push('4');
+                break;
+            case '3,6':
+                grid.push('5');
+                break;
+            case '4,4':
+                grid.push('6');
+                break;
+            case '4,5':
+                grid.push('7');
+                break;
+            case '4,6':
+                grid.push('8');
+                break;
+        }
+        // console.log('第二个单元格');
     }else if(item[0]> 3 && item[0]< 7 && item[1]> 3 && item[1]< 7){
-        return 'five';
-        console.log('第五个单元格');
+        grid.push('five');
+        item = item.join();
+        switch(item){
+            case '4,4':
+                grid.push('0');
+                break;
+            case '4,5':
+                grid.push('1');
+                break;
+            case '4,6':
+                grid.push('2');
+                break;
+            case '5,4':
+                grid.push('3');
+                break;
+            case '5,5':
+                grid.push('4');
+                break;
+            case '5,6':
+                grid.push('5');
+                break;
+            case '6,4':
+                grid.push('6');
+                break;
+            case '6,5':
+                grid.push('7');
+                break;
+            case '6,6':
+                grid.push('8');
+                break;
+        }
+        // console.log('第五个单元格');
     }else if(item[0]> 6  && item[1]> 3 && item[1]< 7){
-        return 'eight';
-        console.log('第八个单元格');
+        grid.push('eight');
+        item = item.join();
+        switch(item){
+            case '7,4':
+                grid.push('0');
+                break;
+            case '7,5':
+                grid.push('1');
+                break;
+            case '7,6':
+                grid.push('2');
+                break;
+            case '8,4':
+                grid.push('3');
+                break;
+            case '8,5':
+                grid.push('4');
+                break;
+            case '8,6':
+                grid.push('5');
+                break;
+            case '9,4':
+                grid.push('6');
+                break;
+            case '9,5':
+                grid.push('7');
+                break;
+            case '9,6':
+                grid.push('8');
+                break;
+        }
+        // console.log('第八个单元格');
     }else if(item[0]< 4  && item[1]> 6){
-        return 'three';
-        console.log('第三个单元格');
+        grid.push('three');
+        item = item.join();
+
+        switch(item){
+            case '1,7':
+                grid.push('0');
+                break;
+            case '1,8':
+                grid.push('1');
+                break;
+            case '1,9':
+                grid.push('2');
+                break;
+            case '2,7':
+                grid.push('3');
+                break;
+            case '2,8':
+                grid.push('4');
+                break;
+            case '2,9':
+                grid.push('5');
+                break;
+            case '3,7':
+                grid.push('6');
+                break;
+            case '3,8':
+                grid.push('7');
+                break;
+            case '3,9':
+                grid.push('8');
+                break;
+        }
+        // console.log('第三个单元格');
     }else if(item[0]> 3 && item[0]< 7 && item[1]> 6 ){
-        return 'six';
-        console.log('第六个单元格');
+        grid.push('six');
+        item = item.join();
+
+        switch(item){
+            case '4,7':
+                grid.push('0');
+                break;
+            case '4,8':
+                grid.push('1');
+                break;
+            case '4,9':
+                grid.push('2');
+                break;
+            case '5,7':
+                grid.push('3');
+                break;
+            case '5,8':
+                grid.push('4');
+                break;
+            case '5,9':
+                grid.push('5');
+                break;
+            case '6,7':
+                grid.push('6');
+                break;
+            case '6,8':
+                grid.push('7');
+                break;
+            case '6,9':
+                grid.push('8');
+                break;
+        }
+        // console.log('第六个单元格');
     }else if(item[0]> 6  && item[1]>6 ){
-        return 'nine';
-        console.log('第九个单元格');
+        grid.push('nine');
+        item = item.join();
+        switch(item){
+            case '7,7':
+                grid.push('0');
+                break;
+            case '7,8':
+                grid.push('1');
+                break;
+            case '7,9':
+                grid.push('2');
+                break;
+            case '8,7':
+                grid.push('3');
+                break;
+            case '8,8':
+                grid.push('4');
+                break;
+            case '8,9':
+                grid.push('5');
+                break;
+            case '9,7':
+                grid.push('6');
+                break;
+            case '9,8':
+                grid.push('7');
+                break;
+            case '9,9':
+                grid.push('8');
+                break;
+        }
+        // console.log('第九个单元格');
     }
 }
 palaceIsExist(Sudoku['one'],'5');
 
+// 根据传过来的参数-确定他的位置
+function lookup(item) {
+
+}
 for(let i = 0;i<total;i++){
     // console.log(i);
     // 每次生成把上一次的结果设置为空
@@ -153,40 +436,88 @@ for(let i = 0;i<total;i++){
     let a= replaces(subscript[0]);
     // 判断当前行是否允许插入
     let isLine= palaceIsExist(Line[a],oneNum);
-    console.log('下标'+subscript+'插入元素'+oneNum);
+    // console.log('下标'+subscript+'插入元素'+oneNum);
     if(isLine){
         // 行能插入
         let isRow= palaceIsExist(Row[a],oneNum);
         if(isRow){
             // 列能插入
             // 判断输入那个单元格
-            let grid= Transformation(subscript);
-            let isGrid= palaceIsExist(Sudoku[grid],oneNum);
-            console.log(grid);
+            Transformation(subscript);
+            let isGrid= palaceIsExist(Sudoku[grid[0]],oneNum);
             if(isGrid){
                 // 当前单元格是否插入成功  -  并给当前元素赋值
-                Sudoku[grid][subscript[1]] = oneNum;
-                console.log(oneNum);
+                console.log(grid+'----'+oneNum);
+                // 判断当前元素是否已经存在元素
+                if(Sudoku[grid[0]][grid[1]] == ''){
+                    Sudoku[grid[0]][grid[1]] = oneNum;
+                    grid = [];
+                }else {
+                    // 当前位置已经有值
+                    console.log(grid[0]+'当前位置已经有值'+Sudoku[grid[0]][grid[1]]);
+                    total++;
+                    grid = [];
+                }
             }else {
                 // 当前单元格内不能插入元素
-                // alert(grid+'号单元格内已有元素'+oneNum);
-                console.log(grid+'号单元格内已有元素'+oneNum);
+                console.log(grid[0]+'号单元格内已有元素'+oneNum);
                 total++;
+                grid = [];
+
             }
         }else {
             // 列不能插入
             // alert(subscript[1]+'列已有元素'+oneNum);
             console.log(subscript[1]+'列已有元素'+oneNum);
             total++;
+            grid = [];
+
         }
     }else {
         // 行已经有重复的元素
         // alert(subscript[0]+'行已有元素'+oneNum);
         console.log(subscript[0]+'行已有元素'+oneNum);
         total++;
+        grid = [];
+
     }
 }
 console.log(Sudoku);
 
 // 遇到问题
-// 随机生成的坐标是 一个数组 [8, 7]  
+// bug-无法根据传过来的下标 获取这个位置在单元格中的具体位置
+// 1.1 1.2 1.3
+// 2.1 2.2 2.3
+// 3.1 3.2 3.3 第一个单元格
+
+// 1.4 1.5 1.6
+// 2.4 2.5 2.6 第二个单元格
+// 3.4 3.5 3.6
+
+// 1.7 1.8 1.9
+// 2.7 2.8 2.9 第三个单元格
+// 3.7 3.8 3.9
+
+// 4.1 4.2 4.3
+// 5.1 5.2 5.3 第四个单元格
+// 6.1 6.2 6.3
+
+// 4.4 4.5 4.6 
+// 5.4 5.5 5.6 第五个单元格
+// 6.4 6.5 6.6
+
+// 4.7 4.8 4.9
+// 5.7 5.8 5.9 第六个单元格
+// 6.7 6.8 6.9
+
+// 7.1 7.2 7.3
+// 8.1 8.2 8.3 第七个单元格
+// 9.1 9.2 9.3
+
+// 7.4 7.5 7.6
+// 8.4 8.5 8.6 第八个单元格
+// 9.4 9.5 9.6
+
+// 7.7 7.8 7.9
+// 8.7 8.8 8.9 第九个单元格
+// 9.7 9.8 9.9 
