@@ -48,6 +48,18 @@ var num,temporary,sub;
 // [7,8] 表示第七行 第八列
 var subscript = [];  
 var oneNum = '';
+// 初始化 所有单元格的下标
+var allSubscript = [];
+
+// 生成单元格所有的坐标
+function Initialization(){
+    for(let i= 1;i< 10;i++){
+        for(let j= 1;j< 10;j++){
+            allSubscript.push([i,j]);
+        }
+    }
+}
+Initialization();
 // 储存当前下标 所对应的单元格和数组下标
 var grid = [];
 
@@ -55,17 +67,18 @@ var grid = [];
 var arr = [1,2,3,4,5,6,7,8,9];
 
 // 随机插入数字的总个数
-var total = 1;
+var total = 60;
 
 // 第一步 随机取出一个下标  TakeSubscript
 function TakeSubscript(){
-    for(let i = 0;i<2;i++){
-        sub = Math.ceil(Math.random()*9);
-        subscript.push(sub);
-    }
+    // 随机取出一个下标 这个下边为
+    sub = Math.ceil(Math.random()*allSubscript.length)-1;
+    console.log(sub);
+    console.log(allSubscript.length);
+    subscript.push(allSubscript[sub]);
+    
     oneNum = Math.ceil(Math.random()*8);
 }
-
 // 把数字换成英文数字
 function replaces(item){
     switch(item){
@@ -219,31 +232,31 @@ function Transformation(item) {
         item = item.join();
 
         switch(item){
-            case '2,4':
+            case '1,4':
                 grid.push('0');
                 break;
-            case '2,5':
+            case '1,5':
                 grid.push('1');
                 break;
-            case '2,6':
+            case '1,6':
                 grid.push('2');
                 break;
-            case '3,4':
+            case '2,4':
                 grid.push('3');
                 break;
-            case '3,5':
+            case '2,5':
                 grid.push('4');
                 break;
-            case '3,6':
+            case '2,6':
                 grid.push('5');
                 break;
-            case '4,4':
+            case '3,4':
                 grid.push('6');
                 break;
-            case '4,5':
+            case '3,5':
                 grid.push('7');
                 break;
-            case '4,6':
+            case '3,6':
                 grid.push('8');
                 break;
         }
@@ -418,27 +431,25 @@ function Transformation(item) {
     }
 }
 
-for(let i = 0;i<1;i++){
-    // console.log(i);
+for(let i = 0;i<total;i++){
     // 每次生成把上一次的结果设置为空
     subscript = [];
     oneNum = '';
 
     // 生成随机的下标
     TakeSubscript();
-
     // 根据传过来的数字 转换成对应的英文字母 
-    let a= replaces(subscript[0]);
+    console.log(subscript[0]);
+    let a= replaces(subscript[0][0]);
     // 判断当前行是否允许插入
     let isLine= palaceIsExist(Line[a],oneNum);
-    // console.log('下标'+subscript+'插入元素'+oneNum);
     if(isLine){
         // 行能插入
         let isRow= palaceIsExist(Row[a],oneNum);
         if(isRow){
             // 列能插入
             // 判断输入那个单元格
-            Transformation(subscript);
+            Transformation(subscript[0]);
             let isGrid= palaceIsExist(Sudoku[grid[0]],oneNum);
             if(isGrid){
                 // 当前单元格是否插入成功  -  并给当前元素赋值
@@ -447,6 +458,8 @@ for(let i = 0;i<1;i++){
                 if(Sudoku[grid[0]][grid[1]] == ''){
                     Sudoku[grid[0]][grid[1]] = oneNum;
                     grid = [];
+                    // 删除这个元素
+                    allSubscript.splice(sub,1);
                 }else {
                     // 当前位置已经有值
                     console.log(grid[0]+'当前位置已经有值'+Sudoku[grid[0]][grid[1]]);
@@ -463,7 +476,7 @@ for(let i = 0;i<1;i++){
         }else {
             // 列不能插入
             // alert(subscript[1]+'列已有元素'+oneNum);
-            console.log(subscript[1]+'列已有元素'+oneNum);
+            console.log(subscript[0][1]+'列已有元素'+oneNum);
             total++;
             grid = [];
 
@@ -471,13 +484,16 @@ for(let i = 0;i<1;i++){
     }else {
         // 行已经有重复的元素
         // alert(subscript[0]+'行已有元素'+oneNum);
-        console.log(subscript[0]+'行已有元素'+oneNum);
+        console.log(subscript[0][0]+'行已有元素'+oneNum);
         total++;
         grid = [];
 
     }
 }
 console.log(Sudoku);
+console.log(allSubscript);
+
+
 
 // 遇到问题
 // bug-无法根据传过来的下标 获取这个位置在单元格中的具体位置
