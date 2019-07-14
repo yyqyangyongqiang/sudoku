@@ -6,145 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>数独游戏</title>
-    <style>
-        #app {
-            width: 600px;
-            height: 600px;
-            border: 1px solid #333;
-            border-right: 0;
-            box-sizing: border-box;
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .big-lattice {
-            box-sizing: border-box;
-            width: 33.3333333%;
-            height: 33.333333%;
-            border-right: 1px solid #333;
-            border-bottom: 1px solid #333;
-
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .small-larrice {
-            width: 33.3333333%;
-            height: 33.333333%;
-            border-right: 1px solid #333;
-            border-bottom: 1px solid #333;
-            box-sizing: border-box;
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
             text-align: center;
-            line-height: 63px;
+        }
+        table td,
+        table th {
+            border: 1px solid #cad9ea;
+            color: #666;
+            height: 40px;
+            width: 40px;
+        }
+
+        table thead th {
+            background-color: #CCE8EB;
+            width: 100px;
+        }
+
+        table tr:nth-child(odd) {
+            background: #fff;
+        }
+
+        table tr:nth-child(even) {
+            background: #F5FAFA;
         }
     </style>
 </head>
 
 <body>
     <div id="app">
-
-        <div class="big-lattice oneCell">
-            <div class="small-larrice" onclick="currentClick(this)">1</div>
-            <div class="small-larrice">{{one.all}}</div>
-            <div class="small-larrice">3</div>
-            <div class="small-larrice">4</div>
-            <div class="small-larrice">5</div>
-            <div class="small-larrice">6</div>
-            <div class="small-larrice">7</div>
-            <div class="small-larrice">8</div>
-            <div class="small-larrice">9</div>
-        </div>
-        <div class="big-lattice twoCell">
-            <div class="small-larrice">1</div>
-            <div class="small-larrice">2</div>
-            <div class="small-larrice">3</div>
-            <div class="small-larrice">4</div>
-            <div class="small-larrice">5</div>
-            <div class="small-larrice">6</div>
-            <div class="small-larrice">7</div>
-            <div class="small-larrice">8</div>
-            <div class="small-larrice">9</div>
-        </div>
-        <div class="big-lattice threeCell">
-            <div class="small-larrice">1</div>
-            <div class="small-larrice">2</div>
-            <div class="small-larrice">3</div>
-            <div class="small-larrice">4</div>
-            <div class="small-larrice">5</div>
-            <div class="small-larrice">6</div>
-            <div class="small-larrice">7</div>
-            <div class="small-larrice">8</div>
-            <div class="small-larrice">9</div>
-        </div>
-        <div class="big-lattice fourCell">
-            <div class="small-larrice">1</div>
-            <div class="small-larrice">2</div>
-            <div class="small-larrice">3</div>
-            <div class="small-larrice">4</div>
-            <div class="small-larrice">5</div>
-            <div class="small-larrice">6</div>
-            <div class="small-larrice">7</div>
-            <div class="small-larrice">8</div>
-            <div class="small-larrice">9</div>
-        </div>
-        <div class="big-lattice fiveCell">
-            <div class="small-larrice">1</div>
-            <div class="small-larrice">2</div>
-            <div class="small-larrice">3</div>
-            <div class="small-larrice">4</div>
-            <div class="small-larrice">5</div>
-            <div class="small-larrice">6</div>
-            <div class="small-larrice">7</div>
-            <div class="small-larrice">8</div>
-            <div class="small-larrice">9</div>
-        </div>
-        <div class="big-lattice sixCell">
-            <div class="small-larrice">1</div>
-            <div class="small-larrice">2</div>
-            <div class="small-larrice">3</div>
-            <div class="small-larrice">4</div>
-            <div class="small-larrice">5</div>
-            <div class="small-larrice">6</div>
-            <div class="small-larrice">7</div>
-            <div class="small-larrice">8</div>
-            <div class="small-larrice">9</div>
-        </div>
-        <div class="big-lattice sevenCell">
-            <div class="small-larrice">1</div>
-            <div class="small-larrice">2</div>
-            <div class="small-larrice">3</div>
-            <div class="small-larrice">4</div>
-            <div class="small-larrice">5</div>
-            <div class="small-larrice">6</div>
-            <div class="small-larrice">7</div>
-            <div class="small-larrice">8</div>
-            <div class="small-larrice">9</div>
-        </div>
-        <div class="big-lattice eightCell">
-            <div class="small-larrice">1</div>
-            <div class="small-larrice">2</div>
-            <div class="small-larrice">3</div>
-            <div class="small-larrice">4</div>
-            <div class="small-larrice">5</div>
-            <div class="small-larrice">6</div>
-            <div class="small-larrice">7</div>
-            <div class="small-larrice">8</div>
-            <div class="small-larrice">9</div>
-        </div>
-        <div class="big-lattice niceCell">
-            <div class="small-larrice">1</div>
-            <div class="small-larrice">2</div>
-            <div class="small-larrice">3</div>
-            <div class="small-larrice">4</div>
-            <div class="small-larrice">5</div>
-            <div class="small-larrice">6</div>
-            <div class="small-larrice">7</div>
-            <div class="small-larrice">8</div>
-            <div class="small-larrice">9</div>
-        </div>
     </div>
 </body>
 
+
+
 </html>
 <script src="admin.js"></script>
+
 <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
